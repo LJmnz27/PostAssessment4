@@ -1,4 +1,4 @@
-package com.rusili.assessment4post.fragments;
+package com.rusili.assessment4post.detail;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -26,7 +26,8 @@ public class DetailFragment extends Fragment {
     private String animalImage;
     private String animalwebsite;
 
-    public static DetailFragment newInstance(@Nullable String name,
+    // Pass in data to Fragment through static method parameters.
+    static DetailFragment newInstance(@Nullable String name,
                                              @Nullable String image,
                                              @Nullable String wiki) {
         final DetailFragment detailFragment = new DetailFragment();
@@ -39,16 +40,8 @@ public class DetailFragment extends Fragment {
         return detailFragment;
     }
 
-    @Override
-    public void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            animalName = getArguments().getString(NAME_KEY);
-            animalImage = getArguments().getString(IMAGE_KEY);
-            animalwebsite = getArguments().getString(WIKI_KEY);
-        }
-    }
-
+    // Get interface/listener from parent Activity in onAttach, cast it from Context to listener class
+    // and save it as a field.
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
@@ -56,6 +49,17 @@ public class DetailFragment extends Fragment {
             listener = (OnFragmentInteractionListener) context;
         } else {
             throw new ClassCastException(context.toString() + "must implement this interface");
+        }
+    }
+
+    // Retrieve passed in data in OnCreate
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        if (getArguments() != null) {
+            animalName = getArguments().getString(NAME_KEY);
+            animalImage = getArguments().getString(IMAGE_KEY);
+            animalwebsite = getArguments().getString(WIKI_KEY);
         }
     }
 
@@ -84,13 +88,14 @@ public class DetailFragment extends Fragment {
         });
     }
 
+    // Nullify listener on detach or you will get memory leaks!
     @Override
     public void onDetach() {
         super.onDetach();
         listener = null;
     }
 
-    public interface OnFragmentInteractionListener {
+    interface OnFragmentInteractionListener {
         void onFragmentInteraction(String website);
     }
 }

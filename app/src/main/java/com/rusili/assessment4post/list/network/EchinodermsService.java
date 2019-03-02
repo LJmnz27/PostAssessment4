@@ -1,6 +1,6 @@
-package com.rusili.assessment4post.network;
+package com.rusili.assessment4post.list.network;
 
-import com.rusili.assessment4post.model.EchinodermResponse;
+import com.rusili.assessment4post.list.model.EchinodermResponse;
 
 import retrofit2.Call;
 import retrofit2.http.GET;

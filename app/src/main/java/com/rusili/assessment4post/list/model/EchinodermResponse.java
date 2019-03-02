@@ -1,4 +1,4 @@
-package com.rusili.assessment4post.model;
+package com.rusili.assessment4post.list.model;
 
 import android.support.annotation.Nullable;
 

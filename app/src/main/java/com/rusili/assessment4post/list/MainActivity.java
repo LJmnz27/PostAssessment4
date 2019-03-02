@@ -1,4 +1,4 @@
-package com.rusili.assessment4post;
+package com.rusili.assessment4post.list;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -8,11 +8,13 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 
-import com.rusili.assessment4post.controller.AnimalAdapter;
-import com.rusili.assessment4post.model.Animal;
-import com.rusili.assessment4post.model.EchinodermResponse;
-import com.rusili.assessment4post.network.EchinodermsService;
-import com.rusili.assessment4post.network.RetrofitSingleton;
+import com.rusili.assessment4post.R;
+import com.rusili.assessment4post.detail.SecondActivity;
+import com.rusili.assessment4post.list.rv.AnimalAdapter;
+import com.rusili.assessment4post.list.model.Animal;
+import com.rusili.assessment4post.list.model.EchinodermResponse;
+import com.rusili.assessment4post.list.network.EchinodermsService;
+import com.rusili.assessment4post.list.network.RetrofitSingleton;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -38,12 +40,14 @@ public class MainActivity extends AppCompatActivity implements MainNavigator {
         retrofitEchinodermCall();
     }
 
+    // Set views separately from network call response. This way we only set them once instead of each time the network call finishes.
     private void setViews() {
         recyclerView = findViewById(R.id.recycler_view);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
     }
 
     private void retrofitEchinodermCall() {
+        // Casting the activity as an interface to pass into the activity since it's inside an anonymous class.
         final MainNavigator navigator = this;
 
         final Retrofit retrofit = RetrofitSingleton.getInstance();
@@ -64,6 +68,7 @@ public class MainActivity extends AppCompatActivity implements MainNavigator {
         });
     }
 
+    // All intent/activity related code should be inside of activities and not viewholders/fragments.
     @Override
     public void toSecondActivity(@Nullable Animal animal) {
         final Intent intent = new Intent(this, SecondActivity.class);

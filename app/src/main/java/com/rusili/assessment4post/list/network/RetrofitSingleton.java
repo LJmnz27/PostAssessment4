@@ -1,4 +1,4 @@
-package com.rusili.assessment4post.network;
+package com.rusili.assessment4post.list.network;
 
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;

@@ -1,4 +1,4 @@
-package com.rusili.assessment4post;
+package com.rusili.assessment4post.detail;
 
 import android.content.Intent;
 import android.net.Uri;
@@ -6,7 +6,8 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 
-import com.rusili.assessment4post.fragments.DetailFragment;
+import com.rusili.assessment4post.R;
+import com.rusili.assessment4post.list.MainActivity;
 
 public class SecondActivity extends AppCompatActivity implements DetailFragment.OnFragmentInteractionListener {
 
@@ -20,6 +21,7 @@ public class SecondActivity extends AppCompatActivity implements DetailFragment.
         final String image = intent.getStringExtra(MainActivity.IMAGE_KEY);
         final String wiki = intent.getStringExtra(MainActivity.WIKI_KEY);
 
+        // Pass in data from activity to fragment through static method.
         final DetailFragment detailFragment = DetailFragment.newInstance(name, image, wiki);
         getSupportFragmentManager()
                 .beginTransaction()
